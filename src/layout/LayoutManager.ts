@@ -1,18 +1,19 @@
 import { maxBoxNumInRow } from '../constant';
 
-let instance = null;
-
 class LayoutManager {
-  // singleton
+  containerWidth: string | null;
+  containerWidthMax: string | null;
+  helperWidth: string | null;
+  helperWidthMax: string | null;
+
   constructor() {
-    if (!instance) {
-      this.sizeInfo = null;
-      instance = this;
-    }
-    return instance;
+    this.containerWidth = null;
+    this.containerWidthMax = null;
+    this.helperWidth = null;
+    this.helperWidthMax = null;
   }
 
-  set windowWidth(wiw) {
+  set windowWidth(wiw: number) {
     const [boxWidth, boxMargin] = LayoutManager.boxSize(wiw);
     const util = LayoutManager.widthUtility(wiw);
 
@@ -20,19 +21,17 @@ class LayoutManager {
     const maxTotal = boxWidth * maxBoxNumInRow;
     const doubleMargin = boxMargin * 2;
 
-    this.sizeInfo = {
-      containerWidth: `${wd}px`,
-      containerWidthMax: `${maxTotal}px`,
-      helperWidth: `${wd - doubleMargin}px`,
-      helperWidthMax: `${maxTotal - doubleMargin}px`,
-    };
+    this.containerWidth = `${wd}px`;
+    this.containerWidthMax = `${maxTotal}px`;
+    this.helperWidth = `${wd - doubleMargin}px`;
+    this.helperWidthMax = `${maxTotal - doubleMargin}px`;
   }
 
-  static widthUtility(wiw) {
+  static widthUtility(wiw: number): number {
     return wiw > 692 ? 0.9 : 0.99;
   }
 
-  static boxSize(wiw) {
+  static boxSize(wiw: number): number[] {
     // Borders and padding are not included in the width calculation.
     let width;
     let margin;

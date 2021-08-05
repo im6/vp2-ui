@@ -1,0 +1,12 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": true,
+    "noUnusedLocals": true,
+    "target": "es6",
+    "resolveJsonModule": true,
+    "strict": true,
+    "sourceMap": true,
+    "moduleResolution": "node"
+  },
+  "exclude": ["node_modules"]
+}

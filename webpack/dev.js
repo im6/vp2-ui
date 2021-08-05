@@ -6,7 +6,7 @@ const port = 3000;
 const publicPath = '/hot/';
 const backendProxy = 'http://192.168.1.249:3000';
 
-const { babelLoader, cssLoader, entry, resolve } = common;
+const { babelLoader, cssLoader, tsLoader, entry, resolve } = common;
 module.exports = {
   mode: 'development',
   devtool: 'eval-cheap-source-map',
@@ -18,6 +18,7 @@ module.exports = {
   },
   module: {
     rules: [
+      tsLoader,
       babelLoader,
       cssLoader,
       {

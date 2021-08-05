@@ -7,6 +7,11 @@ module.exports = {
     bundle4: './src/profile/index.js',
     bundle5: './src/admin/index.js',
   },
+  tsLoader: {
+    test: /\.tsx?$/,
+    use: 'ts-loader',
+    exclude: /node_modules/,
+  },
   babelLoader: {
     test: /\.jsx?$/,
     exclude: /node_modules/,
@@ -24,6 +29,6 @@ module.exports = {
     use: ['style-loader', 'css-loader'],
   },
   resolve: {
-    extensions: ['.js'],
+    extensions: ['.js', '.ts'],
   },
 };

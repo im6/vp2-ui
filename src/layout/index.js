@@ -14,7 +14,7 @@ const adjustLayout = (w) => {
     containerWidthMax,
     helperWidth,
     helperWidthMax,
-  } = sizeManager.sizeInfo;
+  } = sizeManager;
   mainElem.style.width = containerWidth;
   mainElem.style.maxWidth = containerWidthMax;
   if (helpElem) {
