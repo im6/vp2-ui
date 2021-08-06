@@ -27,5 +27,6 @@ interface globalAppSchema {
 declare global {
   interface Window {
     _colorpk: globalAppSchema;
+    CustomEvent: any;
   }
 }

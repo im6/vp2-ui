@@ -1,6 +1,6 @@
 const eventPolyFill = () => {
   if (typeof window.CustomEvent === 'function') return false; // If not IE
-  function CustomEvent(event, params0) {
+  function CustomEvent(event: any, params0: any) {
     const evt = document.createEvent('CustomEvent');
     const params = params0 || {
       bubbles: false,
@@ -23,10 +23,5 @@ const eventPolyFill = () => {
 
 eventPolyFill();
 
-const event = new CustomEvent('_COLORPK_SCRIPT_READY');
-window.dispatchEvent(event);
-
-if (process.env.NODE_ENV === 'development') {
-  // eslint-disable-next-line global-require
-  require('./globalTypeCheck');
-}
+const readyEvent = new CustomEvent('_COLORPK_SCRIPT_READY');
+window.dispatchEvent(readyEvent);
