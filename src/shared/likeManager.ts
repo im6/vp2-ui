@@ -1,34 +1,37 @@
 import { likeAjax, localStorageEnabled } from './util';
 
 const LSLIKEKEY = 'userLike';
+const appObj = window._colorpk;
 
 class LikeManagement {
+  isAuth: boolean;
+  hasLocalStorage: boolean;
+  likeMap: Record<string, boolean>;
+
   constructor() {
-    this.isAuth = window._colorpk.auth;
+    this.isAuth = appObj.auth;
     this.hasLocalStorage = localStorageEnabled;
     this.likeMap = this.initLike();
   }
 
   initLike() {
-    const res = {};
+    const res = <Record<string, boolean>>{};
     if (this.isAuth) {
       // grab from global _colorpk
-      if (Array.isArray(window._colorpk.list1)) {
+      if (Array.isArray(appObj.list1)) {
         // profile page's likes, [Color]
-        window._colorpk.list1.forEach((v) => {
+        appObj.list1.forEach((v) => {
           res[v.k.toString()] = true;
         });
-      } else if (Array.isArray(window._colorpk.likes)) {
+      } else if (Array.isArray(appObj.likes)) {
         // latest or popular, [Int]
-        window._colorpk.likes.forEach((v) => {
+        appObj.likes.forEach((v) => {
           res[v.toString()] = true;
         });
       }
     } else if (this.hasLocalStorage) {
       // no auth, grab localStorage
-      const currentLocalState = JSON.parse(
-        window.localStorage.getItem(LSLIKEKEY)
-      );
+      const currentLocalState = this.getLsLike();
       if (Array.isArray(currentLocalState)) {
         currentLocalState.forEach((v) => {
           res[v.toString()] = true;
@@ -42,22 +45,28 @@ class LikeManagement {
     return res;
   }
 
-  addLike(id) {
+  getLsLike() {
+    const likeStr = window.localStorage.getItem(LSLIKEKEY);
+    if (!likeStr) return null;
+    return JSON.parse(likeStr);
+  }
+
+  addLike(id: number) {
     this.likeMap[id.toString()] = true;
     likeAjax(id, 'POST');
     if (!this.isAuth && this.hasLocalStorage) {
-      const userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
+      const userLike = this.getLsLike();
       userLike.push(id);
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
     }
   }
 
-  removeLike(id) {
+  removeLike(id: number) {
     delete this.likeMap[id.toString()];
     likeAjax(id, 'DELETE');
     if (!this.isAuth && this.hasLocalStorage) {
-      let userLike = JSON.parse(window.localStorage.getItem(LSLIKEKEY));
-      userLike = userLike.filter((v) => v !== id);
+      let userLike = this.getLsLike();
+      userLike = userLike.filter((v: number) => v !== id);
       window.localStorage.setItem(LSLIKEKEY, JSON.stringify(userLike));
     }
   }
