@@ -22,6 +22,7 @@ interface globalAppSchema {
   defaultColors?: string;
   list0?: ColorSchema[];
   list1?: ColorSchema[];
+  removeWelcome?: () => void;
 }
 
 declare global {

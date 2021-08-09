@@ -1,20 +1,15 @@
 import { debounce } from '../shared/util';
-import LayoutManager from './LayoutManager';
+import getComponentWidth from './helper';
 import { checkWelcome, hideWelcome } from '../shared/userPreference';
 
-const sizeManager = new LayoutManager();
-const mainElem = document.querySelector('.list');
-const isWelcomeHidden = checkWelcome() && false; // todo: always show colorpk v1
-const helpElem = document.querySelector('.help');
+const mainElem = document.querySelector('.list') as HTMLElement;
+const helpElem = document.querySelector('.help') as HTMLElement;
 
-const adjustLayout = (w) => {
-  sizeManager.windowWidth = w;
-  const {
-    containerWidth,
-    containerWidthMax,
-    helperWidth,
-    helperWidthMax,
-  } = sizeManager;
+const isWelcomeHidden = checkWelcome() && false; // todo: always show colorpk v1
+
+const adjustLayout = (w: number) => {
+  const { containerWidth, containerWidthMax, helperWidth, helperWidthMax } =
+    getComponentWidth(w);
   mainElem.style.width = containerWidth;
   mainElem.style.maxWidth = containerWidthMax;
   if (helpElem) {
@@ -23,8 +18,9 @@ const adjustLayout = (w) => {
   }
 };
 
-window.onresize = debounce((e) => {
-  adjustLayout(e.target.innerWidth);
+window.onresize = debounce((evt: UIEvent) => {
+  const w = evt.target as Window;
+  adjustLayout(w.innerWidth);
 }, 250);
 
 adjustLayout(window.innerWidth);
@@ -32,6 +28,7 @@ adjustLayout(window.innerWidth);
 if (!isWelcomeHidden && helpElem) {
   helpElem.style.display = 'block';
   window._colorpk.removeWelcome = () => {
+    if (!helpElem.parentElement) return;
     helpElem.parentElement.removeChild(helpElem);
     hideWelcome();
   };
