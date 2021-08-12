@@ -1,6 +1,7 @@
 import { debounce } from '../shared/util';
 import getComponentWidth from './helper';
 import { checkWelcome, hideWelcome } from '../shared/userPreference';
+import { ColorBrowseRoute } from '../interface';
 
 const mainElem = document.querySelector('.list') as HTMLElement;
 const helpElem = document.querySelector('.help') as HTMLElement;
@@ -27,7 +28,7 @@ adjustLayout(window.innerWidth);
 
 if (!isWelcomeHidden && helpElem) {
   helpElem.style.display = 'block';
-  window._colorpk.removeWelcome = () => {
+  (window._colorpk as ColorBrowseRoute).removeWelcome = () => {
     if (!helpElem.parentElement) return;
     helpElem.parentElement.removeChild(helpElem);
     hideWelcome();

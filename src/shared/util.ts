@@ -81,7 +81,7 @@ export const downloadCanvas = (color: string) => {
   const colors = color.split('#').map((v) => `#${v}`);
   const myCanvas = document.createElement('canvas');
   const ctx = myCanvas.getContext('2d');
-  if (!ctx) return;
+  if (!ctx) return '';
 
   myCanvas.width = WIDTH;
   myCanvas.height = HEIGHT;

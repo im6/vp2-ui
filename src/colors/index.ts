@@ -5,14 +5,15 @@ import createBoxElement from '../box';
 import { debounce } from '../shared/util';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../constant';
 import likeManager from '../shared/likeManager';
+import { ColorBrowseRoute } from '../interface';
 
-const { initData } = window._colorpk;
+const { initData } = window._colorpk as ColorBrowseRoute;
 const LIMIT = initData.length;
 
 const $listDiv = document.getElementsByClassName('list')[0];
 let currentIdx = 0;
 
-const addColorBox = (step) => {
+const addColorBox = (step: number) => {
   let forwardSteps = step;
   for (let i = 0; i < step; i += 1) {
     const v = initData[i + currentIdx];
@@ -44,7 +45,8 @@ const addColorBox = (step) => {
   currentIdx += forwardSteps;
 };
 
-window.onscroll = debounce((evt) => {
+window.onscroll = debounce((evt: UIEvent) => {
+  // @ts-ignore
   const bodyElem = evt.target.scrollingElement || evt.target.activeElement;
   const htmlElem = document.documentElement;
   const position = bodyElem.scrollTop || htmlElem.scrollTop;

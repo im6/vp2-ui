@@ -3,10 +3,16 @@ import './style.scss';
 import createBoxElement from '../box';
 import { downloadCanvas } from '../shared/util';
 import likeManager from '../shared/likeManager';
+import { OneColorRoute } from '../interface';
 
-const downloadBtn = document.getElementById('download');
+const {
+  k: id,
+  v: color,
+  s: like,
+} = (window._colorpk as OneColorRoute).selected;
+const downloadBtn = document.getElementById('download') as HTMLAnchorElement;
 const container = document.getElementsByClassName('container')[0];
-const { k: id, v: color, s: like } = window._colorpk.selected;
+if (!downloadBtn) throw new Error('download btn not found');
 downloadBtn.href = downloadCanvas(color);
 
 const oneBox = createBoxElement({

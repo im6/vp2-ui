@@ -1,8 +1,8 @@
 import { staticPath } from '../constant';
 import { BoxType } from '../interface';
 
-const createBoxElement = (boxVars: BoxType) => {
-  const animDelayValue = boxVars.animDelay ? boxVars.animDelay.toString() : '';
+const createBoxElement = (boxVars: BoxType): HTMLElement => {
+  const animDelayValue = boxVars.animDelay || '';
   const box = document.createElement('div');
   box.classList.add('box');
   box.dataset.k = boxVars.id.toString();

@@ -1,7 +1,8 @@
 import { likeAjax, localStorageEnabled } from './util';
+import { ProfileRoute, ColorBrowseRoute } from '../interface';
 
 const LSLIKEKEY = 'userLike';
-const appObj = window._colorpk;
+const appObj = window._colorpk as ProfileRoute;
 
 class LikeManagement {
   isAuth: boolean;
@@ -23,9 +24,9 @@ class LikeManagement {
         appObj.list1.forEach((v) => {
           res[v.k.toString()] = true;
         });
-      } else if (Array.isArray(appObj.likes)) {
+      } else if (Array.isArray((appObj as ColorBrowseRoute).likes)) {
         // latest or popular, [Int]
-        appObj.likes.forEach((v) => {
+        (appObj as ColorBrowseRoute).likes.forEach((v) => {
           res[v.toString()] = true;
         });
       }
