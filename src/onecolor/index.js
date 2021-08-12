@@ -1,6 +1,6 @@
 import '../shared/base';
 import './style.scss';
-import Box from '../box';
+import createBoxElement from '../box';
 import { downloadCanvas } from '../shared/util';
 import likeManager from '../shared/likeManager';
 
@@ -9,7 +9,7 @@ const container = document.getElementsByClassName('container')[0];
 const { k: id, v: color, s: like } = window._colorpk.selected;
 downloadBtn.href = downloadCanvas(color);
 
-const oneBox = new Box({
+const oneBox = createBoxElement({
   id,
   color,
   like,

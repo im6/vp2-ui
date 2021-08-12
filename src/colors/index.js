@@ -1,7 +1,7 @@
 import '../shared/base';
 import '../layout';
 import './style.scss';
-import Box from '../box';
+import createBoxElement from '../box';
 import { debounce } from '../shared/util';
 import { ENTRYANIMDELAY, INITNUM, STEP, SCROLLBOUND } from '../constant';
 import likeManager from '../shared/likeManager';
@@ -21,7 +21,7 @@ const addColorBox = (step) => {
       break;
     }
     const { k: id, v: color, s: like } = v;
-    const oneBox = new Box({
+    const oneBox = createBoxElement({
       id,
       color,
       like,

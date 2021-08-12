@@ -1,11 +1,11 @@
 module.exports = {
   entry: {
-    bundle0: './src/colors/index.js',
-    bundle1: './src/signin/index.js',
-    bundle2: './src/newcolor/index.js',
-    bundle3: './src/onecolor/index.js',
-    bundle4: './src/profile/index.js',
-    bundle5: './src/admin/index.js',
+    bundle0: './src/colors/index',
+    bundle1: './src/signin/index',
+    bundle2: './src/newcolor/index',
+    bundle3: './src/onecolor/index',
+    bundle4: './src/profile/index',
+    bundle5: './src/admin/index',
   },
   tsLoader: {
     test: /\.tsx?$/,

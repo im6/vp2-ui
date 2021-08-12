@@ -1,7 +1,7 @@
 import '../shared/base';
 import '../layout';
 import './style.scss';
-import Box from '../box';
+import createBoxElement from '../box';
 import likeManager from '../shared/likeManager';
 import { ENTRYANIMDELAY } from '../constant';
 
@@ -17,7 +17,7 @@ const addColorBox = (source) => {
   $listDiv.innerHTML = '';
   window._colorpk[source].forEach((v, i) => {
     const { k: id, v: color, s: like } = v;
-    const oneBox = new Box({
+    const oneBox = createBoxElement({
       id,
       color,
       like,

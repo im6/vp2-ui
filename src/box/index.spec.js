@@ -1,14 +1,14 @@
-import Box from './Box';
+import createBoxElement from './Box';
 
 describe('Box Class function', () => {
   test('render a color box with classname', () => {
     const mockLikeCb = jest.fn();
     const mockUnlikeCb = jest.fn();
     const mockRedirectCb = jest.fn();
-    const testBox = new Box({
+    const testBox = createBoxElement({
       id: 473,
-      color: "64638f#9795cf#aba9e9#cbc9ff",
-      like: 17, 
+      color: '64638f#9795cf#aba9e9#cbc9ff',
+      like: 17,
       isLiked: true,
       animDelay: '10ms',
       onLike: mockLikeCb,
@@ -25,20 +25,20 @@ describe('Box Class function', () => {
     const mockRedirectCb = jest.fn();
 
     const mockColorId = 473;
-    const testBox = new Box({
+    const testBox = createBoxElement({
       id: mockColorId,
-      color: "64638f#9795cf#aba9e9#cbc9ff",
-      like: 17, 
+      color: '64638f#9795cf#aba9e9#cbc9ff',
+      like: 17,
       isLiked: true,
       animDelay: '10ms',
       onLike: mockLikeCb,
       onUnlike: mockUnlikeCb,
       onRedir: mockRedirectCb,
     });
-    
+
     const likeBtn = testBox.querySelector('.btn');
     const canvasElem = testBox.querySelector('.canvas');
-    
+
     likeBtn.click();
     likeBtn.click();
     canvasElem.click();
