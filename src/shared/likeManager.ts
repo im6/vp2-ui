@@ -2,7 +2,7 @@ import { likeAjax, localStorageEnabled } from './util';
 import { ProfileRoute, ColorBrowseRoute } from '../interface';
 
 const LSLIKEKEY = 'userLike';
-const appObj = window._colorpk as ProfileRoute;
+const appObj = window._colorpk;
 
 class LikeManagement {
   isAuth: boolean;
@@ -12,36 +12,34 @@ class LikeManagement {
   constructor() {
     this.isAuth = appObj.auth;
     this.hasLocalStorage = localStorageEnabled;
-    this.likeMap = this.initLike();
+    this.likeMap = this.isAuth ? this.initLikeFromDB() : this.initLikeFromLs();
+  }
+  initLikeFromDB() {
+    const res = <Record<string, boolean>>{};
+    // grab from global _colorpk
+    if (Array.isArray((appObj as ProfileRoute).list1)) {
+      // profile page's likes, [Color]
+      (appObj as ProfileRoute).list1.forEach((v) => {
+        res[v.k.toString()] = true;
+      });
+    } else if (Array.isArray((appObj as ColorBrowseRoute).likes)) {
+      // latest or popular, [Int]
+      (appObj as ColorBrowseRoute).likes.forEach((v) => {
+        res[v.toString()] = true;
+      });
+    }
+    return res;
   }
 
-  initLike() {
+  initLikeFromLs() {
     const res = <Record<string, boolean>>{};
-    if (this.isAuth) {
-      // grab from global _colorpk
-      if (Array.isArray(appObj.list1)) {
-        // profile page's likes, [Color]
-        appObj.list1.forEach((v) => {
-          res[v.k.toString()] = true;
-        });
-      } else if (Array.isArray((appObj as ColorBrowseRoute).likes)) {
-        // latest or popular, [Int]
-        (appObj as ColorBrowseRoute).likes.forEach((v) => {
-          res[v.toString()] = true;
-        });
-      }
-    } else if (this.hasLocalStorage) {
-      // no auth, grab localStorage
-      const currentLocalState = this.getLsLike();
-      if (Array.isArray(currentLocalState)) {
-        currentLocalState.forEach((v) => {
-          res[v.toString()] = true;
-        });
-      } else {
-        window.localStorage.setItem(LSLIKEKEY, JSON.stringify([]));
-      }
+    const currentLocalState = this.getLsLike();
+    if (Array.isArray(currentLocalState)) {
+      currentLocalState.forEach((v) => {
+        res[v.toString()] = true;
+      });
     } else {
-      // not really supported
+      window.localStorage.setItem(LSLIKEKEY, JSON.stringify([]));
     }
     return res;
   }

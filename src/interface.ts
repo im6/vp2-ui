@@ -26,25 +26,25 @@ export interface BoxType {
   onRedir?: (id: number) => void;
 }
 
-interface globalAppBase {
+interface AppBase {
   auth: boolean;
   load0: Date;
 }
-export interface ColorBrowseRoute extends globalAppBase {
+export interface ColorBrowseRoute extends AppBase {
   likes: number[];
   initData: ColorSchema[];
   removeWelcome: () => void;
 }
-export interface OneColorRoute extends globalAppBase {
+export interface OneColorRoute extends AppBase {
   likes: number[];
   selected: ColorSchema;
 }
-export interface CreateColorRoute extends globalAppBase {
+export interface CreateColorRoute extends AppBase {
   defaultColors?: string;
 }
-export interface ProfileRoute extends globalAppBase {
-  list0?: ColorSchema[];
-  list1?: ColorSchema[];
+export interface ProfileRoute extends AppBase {
+  list0: ColorSchema[];
+  list1: ColorSchema[];
 }
 
 declare global {

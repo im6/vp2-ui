@@ -1,4 +1,4 @@
-import createBoxElement from './Box';
+import createBoxElement from './index';
 
 describe('Box Class function', () => {
   test('render a color box with classname', () => {
