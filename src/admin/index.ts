@@ -1,9 +1,10 @@
 import '../shared/base';
 import './style.scss';
 import { ajax, noop } from '../shared/util';
+import { AjaxMethod } from '../interface';
 
 const listElem = document.querySelector('.list');
-const approve = (id, method) => {
+const approve = (id: number, method: AjaxMethod) => {
   ajax({
     method,
     url: `/approve/${id}`,
@@ -12,7 +13,7 @@ const approve = (id, method) => {
     fail: noop,
   });
 
-  listElem.removeChild(document.querySelector(`[data-k="${id}"]`));
+  listElem!.removeChild(document.querySelector(`[data-k="${id}"]`)!);
 };
 
 const syncAjax = () => {

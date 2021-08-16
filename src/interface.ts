@@ -1,5 +1,3 @@
-export type OrderBy = 'popular' | 'latest'; // todo
-
 interface ColorSchema {
   k: number; // key
   v: string; // color value
@@ -7,10 +5,12 @@ interface ColorSchema {
   l?: boolean; // is saved
 }
 
+export type AjaxMethod = 'GET' | 'POST' | 'DELETE';
+
 export interface AjaxConfigSchema {
-  method: string;
+  method: AjaxMethod;
   url: string;
-  data?: string;
+  data?: any;
   success(data: any): void;
   fail(): void;
 }
@@ -46,10 +46,16 @@ export interface ProfileRoute extends AppBase {
   list0: ColorSchema[];
   list1: ColorSchema[];
 }
+export interface AdminRoute extends AppBase {
+  sync: () => void;
+  approve: (a: number) => void;
+  disapprove: (a: number) => void;
+}
 
 declare global {
   interface Window {
     _colorpk:
+      | AdminRoute
       | ColorBrowseRoute
       | OneColorRoute
       | CreateColorRoute

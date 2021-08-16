@@ -1,4 +1,4 @@
-import { AjaxConfigSchema } from '../interface';
+import { AjaxConfigSchema, AjaxMethod } from '../interface';
 
 const htmlTokenElem = document.querySelector(
   '[name=csrfmiddlewaretoken]'
@@ -52,7 +52,7 @@ export const ajax = (config: AjaxConfigSchema) => {
   }
 };
 
-export const likeAjax = (id: number, method: string) => {
+export const likeAjax = (id: number, method: AjaxMethod) => {
   ajax({
     method,
     url: `/like/${id}`,
