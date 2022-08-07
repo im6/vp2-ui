@@ -9,6 +9,7 @@ class LayoutManager {
       this.sizeInfo = null;
       instance = this;
     }
+    // eslint-disable-next-line no-constructor-return
     return instance;
   }
 

@@ -18,6 +18,10 @@ module.exports = {
     rules: [
       babelLoader,
       {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
         test: /\.scss$/,
         use: [
           { loader: 'style-loader' },

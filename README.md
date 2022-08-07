@@ -8,9 +8,5 @@ Before starting development, make sure there is a back-end server running at `lo
 
 ```sh
 yarn install
-yarn start
+yarn dev
 ```
-
-## Special thanks
-
-[styled tab](https://codepen.io/JiveDig/pen/jbdJXR)

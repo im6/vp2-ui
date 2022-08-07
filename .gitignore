@@ -5,3 +5,4 @@ npm-debug.log
 package-lock.json
 err_log.txt
 coverage
+analyze-output

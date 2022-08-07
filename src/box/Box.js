@@ -20,6 +20,7 @@ class Box {
     this.onUnlike = onUnlike;
     this.onRedir = onRedir;
     const elem = this.createElement();
+    // eslint-disable-next-line no-constructor-return
     return elem;
   }
 
@@ -33,8 +34,8 @@ class Box {
     const cvs = document.createElement('div');
     cvs.classList.add('canvas');
     const colors0 = this.color.split('#');
-    const colors1 = colors0.map(v => `#${v}`);
-    colors1.forEach(v => {
+    const colors1 = colors0.map((v) => `#${v}`);
+    colors1.forEach((v) => {
       const oneColor = document.createElement('div');
       const oneColorTxt = document.createElement('span');
       oneColorTxt.innerText = v;
@@ -45,7 +46,7 @@ class Box {
     });
 
     if (this.onRedir) {
-      cvs.onclick = v => {
+      cvs.onclick = (v) => {
         if (v.target.tagName === 'DIV') {
           this.onRedir(this.id);
         }

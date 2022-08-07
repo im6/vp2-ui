@@ -4,7 +4,7 @@ const common = require('./common');
 
 const port = 3000;
 const publicPath = '/hot/';
-const backendProxy = 'http://192.168.1.249:3000';
+const backendProxy = 'http://localhost:3001';
 
 const { babelLoader, cssLoader, entry, resolve } = common;
 module.exports = {
@@ -36,7 +36,6 @@ module.exports = {
     }),
   ],
   devServer: {
-    publicPath,
     open: true,
     hot: true,
     port,
